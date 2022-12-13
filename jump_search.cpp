@@ -31,32 +31,33 @@ int jumpSearch(int arr[], int x, int n) //function to find a number in an array 
 
 	// Doing a linear search for x in block
 	// beginning with prev.
-	while (arr[prev] < x)
+	while (arr[prev] < x) //while the value in index prev is smaller than x, 
 	{
-		prev++;
+		prev++; //add +1 in prev so we can go through the block
 
 		// If we reached next block or end of
 		// array, element is not present.
-		if (prev == min(step, n))
-			return -1;
+		if (prev == min(step, n)) //if prev reaches the end of the block(step) or the end of the array(n), then the number
+		//doesn't exist in the array
+			return -1; //return -1 because the value doesn't exist
 	}
 	// If element is found
-	if (arr[prev] == x)
-		return prev;
+	if (arr[prev] == x) //if the value in index prev is equal to the number we want
+		return prev; //return the index of this number
 
-	return -1;
+	return -1; //if anything doesn't work, return -1 because de value doesnt exist in the array
 }
 
 // Driver program to test function
 int main()
 {
 	int arr[] = { 0, 1, 1, 2, 3, 5, 8, 13, 21,
-				34, 55, 89, 144, 233, 377, 610 };
-	int x = 55;
-	int n = sizeof(arr) / sizeof(arr[0]);
+				34, 55, 89, 144, 233, 377, 610 }; //create an array
+	int x = 55; // x receives the value we want to find in the array
+	int n = sizeof(arr) / sizeof(arr[0]); //calculate the size of the array
 	
 	// Find the index of 'x' using Jump Search
-	int index = jumpSearch(arr, x, n);
+	int index = jumpSearch(arr, x, n); //call the function jumpSearch and save the value returned in the index variable
 
 	// Print the index where 'x' is located
 	cout << "\nNumber " << x << " is at index " << index;
