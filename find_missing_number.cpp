@@ -29,7 +29,22 @@ void findMissing(int arr[], int N) //function to find the missing number of an a
 		if (temp[i] == 0) //if there is any index marked as 0, this is the missing number
 			ans = i + 1; //the missing number is the index+1
 	}
-	cout << "The missing number is: "<< ans << endl;
+	cout << "First approach > The missing number is: "<< ans << endl;
+}
+
+// Second approach: summation
+//In this approach we calculate the sum of the total number from [1,N] and the sum of the array. Subtrating we find
+//the missing number.
+int getMissingNo(int a[], int n) //function to find the missing number of an array. Receives as parameters an array,
+//and the size of the array
+{
+	// Given the range of elements are 1 more than the size of array
+	int N = n + 1;
+
+	int total = (N) * (N + 1) / 2; //the total variable receives the calculation of the sum from 1 to N
+	for (int i = 0; i < n; i++) //for every index in the array
+		total -= a[i]; //subtract that value from the total sum
+	return total; //the remaining value in total is the missing number
 }
 
 /* Driver code */
@@ -38,4 +53,9 @@ int main()
 	int arr[] = { 1, 3, 7, 5, 6, 2 }; //create an array
 	int n = sizeof(arr) / sizeof(arr[0]); //calculate the size of the array
 	findMissing(arr, n); //call the function to find the missing number
+
+	// call of the second function
+	int miss = getMissingNo(arr, n);
+	//cout << miss;
+	cout << "Second approach > The missing number is: "<< miss << endl;
 }
