@@ -27,8 +27,8 @@ int fibMonaccianSearch(int arr[], int x, int n) //function that uses fibonacci n
 		fibM = fibMMm2 + fibMMm1; //fibM receives the sum of fib2 and fib1. This continues until fibM reaches n
 	}
 
-	// Marks the eliminated range from front
-	int offset = -1;
+	int offset = -1; //the offset marks the range of the array that has benn eliminated, starting from the front.
+	//It will be updated in the loop
 
 	/* while there are elements to be inspected. Note that
 	we compare arr[fibMm2] with x. When fibM becomes 1,
@@ -37,35 +37,38 @@ int fibMonaccianSearch(int arr[], int x, int n) //function that uses fibonacci n
 		// Check if fibMm2 is a valid location
 		int i = min(offset + fibMMm2, n - 1); //i receives the minimum number between offset+fib2 and n-1. This is
         //the index of fib2
+		//Since fibMm2 marks approximately one-third of our array, as well as the indices it marks, are sure to be 
+		//valid ones, we can add fibMm2 to offset and check the element at index i = min(offset + fibMm2, n). 
 
-		/* If x is greater than the value at index fibMm2,
-		cut the subarray array from offset to i */
+		// If x is greater than the value at index fibMm2, move the variables to 1 fibonacci numbers down and reset
+		//the offset. This eliminites approx. 1/3 of the array
 		if (arr[i] < x) { //if x is greater than the value in index i
-			fibM = fibMMm1;
-			fibMMm1 = fibMMm2;
-			fibMMm2 = fibM - fibMMm1;
-			offset = i;
+			fibM = fibMMm1; //fib decreases 1 fibonacci number, which is fib1
+			fibMMm1 = fibMMm2; //fib1 decreases 1 fibonacci number, which is fib2
+			fibMMm2 = fibM - fibMMm1; //fib2 decreases 1 fibonacci number. because fib = fib1+fib2, fib2 = fib-fib1
+			offset = i; //the new offset is i
 		}
 
-		/* If x is greater than the value at index fibMm2,
-		cut the subarray after i+1 */
-		else if (arr[i] > x) {
-			fibM = fibMMm2;
-			fibMMm1 = fibMMm1 - fibMMm2;
-			fibMMm2 = fibM - fibMMm1;
+		// If x is smaller than the value at index fibMm2,move the variables to 2 fibonnaci numbers down.
+		// This makes the elimination of approx.2/3 of the array
+		else if (arr[i] > x) { //if x is smaller than the value in index i
+			fibM = fibMMm2; //fib decreases 2 fibonacci numbers, which is fib2
+			fibMMm1 = fibMMm1 - fibMMm2; //fib1 decreases 2 fibonacci numbers
+			fibMMm2 = fibM - fibMMm1; //fib2 decreases 2 fibonacci numbers
 		}
 
 		/* element found. return index */
-		else
-			return i;
+		else //if it is not smaller or greater, it is equal to x and the element was found
+			return i; //return the index of the element
 	}
 
 	/* comparing the last element with x */
-	if (fibMMm1 && arr[offset + 1] == x)
+	if (fibMMm1 && arr[offset + 1] == x) //there might be a single element remaining for comparison, check 
+	//if fibMm1 is 1. If Yes, compare x with that remaining element. If match, return index.
 		return offset + 1;
 
 	/*element not found. return -1 */
-	return -1;
+	return -1; //if nothing worked, the element is not in the array. Return -1
 }
 
 // Driver Code
