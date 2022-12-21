@@ -8,13 +8,11 @@ using namespace std;
 // Merges two subarrays of array[].
 // First subarray is arr[begin..mid]
 // Second subarray is arr[mid+1..end]
-void merge(int array[], int const left, int const mid, int const right) //function to to order the array using merge.
+void merge(int array[], int const left, int const mid, int const right) //function to merge 2 subarrays.
 //Receives as parameters an array, the left, right and the middle index 
 {
 	auto const subArrayOne = mid - left + 1; //variable to save the size of the subarray 1
 	auto const subArrayTwo = right - mid; //variable to save the size of the subarray 2
-	//auto means
-	//const means 
 
 	// Create temp arrays
 	auto *leftArray = new int[subArrayOne], //create a temporary array for the elements in suabarray 1
@@ -64,26 +62,25 @@ void merge(int array[], int const left, int const mid, int const right) //functi
 	delete[] rightArray;
 }
 
-// begin is for left index and end is
-// right index of the sub-array
-// of arr to be sorted */
-void mergeSort(int array[], int const begin, int const end)
+// begin is for left index and end is right index of the sub-array of arr to be sorted */
+void mergeSort(int array[], int const begin, int const end) //function to order the array using the function merge.
+//Receives as parameters an array, and the indexes of the beginning and end of the array
 {
-	if (begin >= end)
+	if (begin >= end) //if the begin index is greater or equal to the end index, there is no more subarrays to split
 		return; // Returns recursively
 
-	auto mid = begin + (end - begin) / 2;
-	mergeSort(array, begin, mid);
-	mergeSort(array, mid + 1, end);
-	merge(array, begin, mid, end);
+	auto mid = begin + (end - begin) / 2; //calculate the middle index
+	mergeSort(array, begin, mid); //call the function recursively from the beginning to the middle of the array
+	mergeSort(array, mid + 1, end); //call the function recursively from the middle to the end of the array
+	merge(array, begin, mid, end); //call the merge function to merge the subarrays
 }
 
 // UTILITY FUNCTIONS
 // Function to print an array
-void printArray(int A[], int size)
+void printArray(int A[], int size) 
 {
-	for (auto i = 0; i < size; i++)
-		cout << A[i] << " ";
+	for (auto i = 0; i < size; i++) //for every index in array
+		cout << A[i] << " "; //print the element in index i
 }
 
 // Driver code
