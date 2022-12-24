@@ -20,11 +20,12 @@ struct Item {
 };
 
 // Comparison function to sort Item according to val/weight ratio
-bool cmp(struct Item a, struct Item b)
+bool cmp(struct Item a, struct Item b) //function to compare items and sort the list. Receives as parameters 2 items
 {
-	double r1 = (double)a.value / (double)a.weight;
-	double r2 = (double)b.value / (double)b.weight;
-	return r1 > r2;
+	double r1 = (double)a.value / (double)a.weight; //calculate the ratio of item a(value divided by weight)
+	double r2 = (double)b.value / (double)b.weight; //calculate the ratio of item b(value divided by weight)
+	return r1 > r2; //compare the ratio of a with the ratio of b. If ratio of a(r1) is greater, returns true. If ratio
+    //of b(r2) is greater, returns false.
 }
 
 // Main greedy function to solve problem
