@@ -10,29 +10,29 @@ using namespace std;
 #define N 3
 
 // A utility function that returns index of minimum value in arr[]
-int getMin(int arr[])
+int getMin(int arr[]) //function to find the minimum element in an array. Receives an array as parameter
 {
-	int minInd = 0;
-	for (int i=1; i<N; i++)
-		if (arr[i] < arr[minInd])
-			minInd = i;
-	return minInd;
+	int minInd = 0; //variable to store the index, starts with 0
+	for (int i=1; i<N; i++) //for every index in the array
+		if (arr[i] < arr[minInd]) //if the element in index i is smaller than the element in the minimum index
+			minInd = i; //the minimum index receives i as the new minimum
+	return minInd; //returns the index with the minimum value
 }
 
 // A utility function that returns index of maximum value in arr[]
-int getMax(int arr[])
+int getMax(int arr[]) //function to find the maximum element in an array.Receives an array as parameter
 {
-	int maxInd = 0;
-	for (int i=1; i<N; i++)
-		if (arr[i] > arr[maxInd])
-			maxInd = i;
-	return maxInd;
+	int maxInd = 0; //variable to store the index, starts with 0
+	for (int i=1; i<N; i++) //for every index in the array
+		if (arr[i] > arr[maxInd]) //if the element in index i is greater than the element in the maximum index
+			maxInd = i; //the maximum index receives i as the new maximum
+	return maxInd; //returns the index with maximum value
 }
 
 // A utility function to return minimum of 2 values
-int minOf2(int x, int y)
+int minOf2(int x, int y) 
 {
-	return (x<y)? x: y;
+	return (x<y)? x: y; //if x is smaller than y, return x, if y is smaller than x, return y.
 }
 
 // amount[p] indicates the net amount to be credited/debited
