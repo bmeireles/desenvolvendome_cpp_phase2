@@ -37,27 +37,26 @@ int minOf2(int x, int y)
 
 // amount[p] indicates the net amount to be credited/debited
 // to/from person 'p'
-// If amount[p] is positive, then i'th person will amount[i]
+// If amount[p] is positive, then i'th person will receive amount[i]
 // If amount[p] is negative, then i'th person will give -amount[i]
 void minCashFlowRec(int amount[])
 {
 	// Find the indexes of minimum and maximum values in amount[]
-	// amount[mxCredit] indicates the maximum amount to be given
-	//				 (or credited) to any person .
-	// And amount[mxDebit] indicates the maximum amount to be taken
-	//				 (or debited) from any person.
-	// So if there is a positive value in amount[], then there must
-	// be a negative value
-	int mxCredit = getMax(amount), mxDebit = getMin(amount);
+	// amount[mxCredit] indicates the maximum amount to be given (or credited) to any person .
+	// And amount[mxDebit] indicates the maximum amount to be taken (or debited) from any person.
+	// So if there is a positive value in amount[], then there must be a negative value
+	int mxCredit = getMax(amount), mxDebit = getMin(amount); // mxCredit receives the index with maximum value from
+	//amount array. And mxDebit receives the index with minimum element from amount.
 
 	// If both amounts are 0, then all amounts are settled
 	if (amount[mxCredit] == 0 && amount[mxDebit] == 0)
 		return;
 
 	// Find the minimum of two amounts
-	int min = minOf2(-amount[mxDebit], amount[mxCredit]);
-	amount[mxCredit] -= min;
-	amount[mxDebit] += min;
+	int min = minOf2(-amount[mxDebit], amount[mxCredit]); //call the function minOf2 to calculate the minimum between
+	//the element in mxCredit and mxDebit
+	amount[mxCredit] -= min; //the element in mxCredit is subtrated by the min
+	amount[mxDebit] += min; //the element in mxDebit is added by the min
 
 	// If minimum is the maximum amount to be
 	cout << "Person " << mxDebit << " pays " << min
@@ -80,11 +79,13 @@ void minCashFlow(int graph[][N])
 	// Calculate the net amount to be paid to person 'p', and
 	// stores it in amount[p]. The value of amount[p] can be
 	// calculated by subtracting debts of 'p' from credits of 'p'
-	for (int p=0; p<N; p++)
-	for (int i=0; i<N; i++)
-		amount[p] += (graph[i][p] - graph[p][i]);
+	for (int p=0; p<N; p++) //for every person in the graph
+		for (int i=0; i<N; i++) //for every other person in the array
+			amount[p] += (graph[i][p] - graph[p][i]); //the net amount of person i is the sum of the current value
+			//plus the subtraction of(everything that person i has to pay person p, minus everything person p has
+			//to pay person j)
 
-	minCashFlowRec(amount);
+	minCashFlowRec(amount); //call function minimum cash flow recursive with the array amount
 }
 
 // Driver program to test above function
@@ -94,9 +95,9 @@ int main()
 	// pay person j
 	int graph[N][N] = { {0, 1000, 2000},
 						{0, 0, 5000},
-						{0, 0, 0},};
+						{0, 0, 0},}; //create a graph
 
 	// Print the solution
-	minCashFlow(graph);
+	minCashFlow(graph); //call the function
 	return 0;
 }
