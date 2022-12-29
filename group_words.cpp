@@ -30,25 +30,34 @@ string getKey(string &str) //function to generate a key for a string. Receives a
 }
 
 // Print all words together with same character sets.
-void wordsWithSameCharSet(string words[], int n)
+void wordsWithSameCharSet(string words[], int n) //function to find words with same keys and print them together.
+//Receives as parameters an array of strings, and the size of the array.
 {
-	// Stores indexes of all words that have same
-	// set of unique characters.
-	unordered_map <string, vector <int> > Hash;
+	// Stores indexes of all words that have same set of unique characters.
+	unordered_map <string, vector <int> > Hash; //creates an unordered map with key type string, and value type
+	//of a vector of int's. The name of the unordered map is Hash
+	//The unordered_map is like a data structure of dictionary type that store element. 
+	//It has a sequence of (key, value) pair, which allows fast retrieval of an individual element based
+	// on their unique key.
 
 	// Traverse all words
-	for (int i=0; i<n; i++)
+	for (int i=0; i<n; i++) //for every index in the array of words
 	{
-		string key = getKey(words[i]);
-		Hash[key].push_back(i);
+		string key = getKey(words[i]); //call the function getKeys for for the word in index i, and store
+		//the value in variable key
+		Hash[key].push_back(i); //add in the hash/unordered map as the last element the word in index i,
+		//with the key previously found
+		//The push_back function adds a new element at the end of the vector, after its current last element. 
 	}
 
 	// print all words that have the same unique character set
-	for (auto it = Hash.begin(); it!=Hash.end(); it++)
+	for (auto it = Hash.begin(); it!=Hash.end(); it++) //for every element in the hash
 	{
-	for (auto v=(*it).second.begin(); v!=(*it).second.end(); v++)
-		cout << words[*v] << ", ";
-	cout << endl;
+		for (auto v=(*it).second.begin(); v!=(*it).second.end(); v++)  //for each set of words in the hash, we 
+		//will have a vector of indices corresponding to it. The words at these indexes have the same set of 
+		//characters
+			cout << words[*v] << ", "; //print the grouped words
+		cout << endl;
 	}
 }
 
@@ -58,8 +67,8 @@ int main()
 	string words[] = { "may", "student", "students", "dog",
 				"studentssess", "god", "cat", "act", "tab",
 				"bat", "flow", "wolf", "lambs", "amy", "yam",
-				"balms", "looped", "poodle"};
-	int n = sizeof(words)/sizeof(words[0]);
-	wordsWithSameCharSet(words, n);
+				"balms", "looped", "poodle"}; //create an array of strings
+	int n = sizeof(words)/sizeof(words[0]); //calculate the size of the array
+	wordsWithSameCharSet(words, n); //call the function with the desired parameters
 	return 0;
 }
