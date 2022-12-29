@@ -8,22 +8,25 @@
 using namespace std;
 #define MAX_CHAR 26
 
-// Generates a key from given string. The key
-// contains all unique characters of given string in
+// Generates a key from given string. The key contains all unique characters of a given string in
 // sorted order consisting of only distinct elements.
-string getKey(string &str)
+string getKey(string &str) //function to generate a key for a string. Receives as parameter the string
+//reference
 {
-	bool visited[MAX_CHAR] = { false };
+	bool visited[MAX_CHAR] = { false }; //create an array of boolean type, with size max_char, an initialize
+    //all spaces as false
 
-	// store all unique characters of current
-	// word in key
-	for (int j = 0; j < str.length(); j++)
-		visited[str[j] - 'a'] = true ;
-	string key = "";
-	for (int j=0; j < MAX_CHAR; j++)
-		if (visited[j])
-			key = key + (char)('a'+j);
+	// store all unique characters of current word in key
+	for (int j = 0; j < str.length(); j++) //for every character in a string
+		visited[str[j] - 'a'] = true ; //mark the index of the calculation (str[j] - 'a') in visited as true.
+	string key = ""; //initialize the key string as empty
+	for (int j=0; j < MAX_CHAR; j++) //for every index in visited array
+		if (visited[j]) //if the value in index j is true
+			key = key + (char)('a'+j); //the key is updated as the previous key plus the character of the ascii (of
+            // 'a' + the ascii of index j)
 	return key;
+    //the operation str[j] - 'a' returns a number, which is the result of the subtraction 
+    //of the ascii's values from each character. Example: 'b' - 'a' = 98 - 97 = 1
 }
 
 // Print all words together with same character sets.
