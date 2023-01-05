@@ -6,40 +6,43 @@
 #include <bits/stdc++.h>
 using namespace std;
 // function to obtain the new time
-void findTime(string T, int K)
+void findTime(string T, int K) //function to calculate the time after adding k minutes. Receives as parameters
+// the initial time as a string T, and the k minutes to be added 
 {
 
 	// convert the given time in minutes
-	int minutes = ((T[0] - '0')
-					* 10
-				+ T[1] - '0')
-					* 60
-				+ ((T[3] - '0')
-						* 10
-					+ T[4] - '0');
+    //"21:39"
+    // 01234 => positions
+	int minutes = ((T[0] - '0') //the ascii of the number in T[0] minus the ascii of 0(48).Multiply the result by 10
+					* 10 //because the value is in the first digit
+				+ T[1] - '0') //sum the previous value with the ascii of the number in T[1] minus the ascii of 0(48).
+					* 60 //Multiply everything by 60 to transform it in minutes
+				+ ((T[3] - '0') //the ascii of the number in T[3] minus the ascii of 0(48).Multiply the result by 10
+						* 10 //because the value is in the first decimal place
+					+ T[4] - '0'); //sum the previous value with the ascii of the number in T[4] minus the ascii of 0(48).
 
 	// Add K to current minutes
-	minutes += K;
+	minutes += K; //here we have the total minutes
 
-	// Obtain the new hour
-	// and new minutes from minutes
-	int hour = (minutes / 60) % 24;
+	// Obtain the new hour and new minutes from minutes
+	int hour = (minutes / 60) % 24; //calculate the hours in the total minutes by dividing it by 60, and then taking
+	//the rest of the division by 24, because we want to presnt the hours in the hh:mm format
 
-	int min = minutes % 60;
+	int min = minutes % 60; //the minutes becomes the rest of the division by 60 
 
 	// Print the hour in appropriate format
-	if (hour < 10) {
+	if (hour < 10) { //if the hour is smaller than 10, we put a 0 before so we will have 2 digits
 		cout << 0 << hour << ":";
 	}
-	else {
+	else { //if it is greater than 10, print it as it is
 		cout << hour << ":";
 	}
 
 	// Print the minute in appropriate format
-	if (min < 10) {
+	if (min < 10) {//if the minute is smaller than 10, we put a 0 before
 		cout << 0 << min;
 	}
-	else {
+	else { //if it is greater than 10, print it as it is
 		cout << min;
 	}
 }
@@ -48,9 +51,9 @@ void findTime(string T, int K)
 int main()
 {
 
-	string T = "21:39";
+	string T = "21:39"; //create a string with the initial time
 
-	int K = 43;
+	int K = 43; //variable to store the minutes to bea added
 
-	findTime(T, K);
+	findTime(T, K); //call the function with the parameters
 }
