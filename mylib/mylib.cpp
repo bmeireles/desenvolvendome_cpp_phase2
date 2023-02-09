@@ -3,3 +3,8 @@
 Mylib::Mylib()
 {
 }
+
+void Mylib::test()
+{
+    qInfo() << "Hello from my shared library!";
+}
